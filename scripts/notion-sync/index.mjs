@@ -16,6 +16,8 @@ import http from 'http'
  * - Year（文字或數字，選填；沒填就從 Date 取年份）
  * - Description（文字，作品頁左欄介紹）、Cover（Files，首頁縮圖）
  * - 頁面內文（圖片與文字段落）→ 作品頁右側內容
+ *   若內文中用 Notion 的「兩欄」排版並排了圖片，同步後在網站上也會維持並排（見下方
+ *   column_list 自訂 transformer），不會被拆成單欄直向排列。
  *
  * 執行：npm run sync（需要 .env 內的 NOTION_API_KEY、NOTION_DATABASE_ID）
  */
@@ -27,6 +29,39 @@ const MANIFEST_FILE = join(__dirname, '../../.synced-works.json')
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 const n2m = new NotionToMarkdown({ notionClient: notion })
+
+// 目前正在處理的作品 slug，供下方 column_list transformer 下載圖片時使用
+// （main() 的迴圈在處理每件作品前會更新這個值；同步是逐一序列處理，不會有並發衝突）
+let currentSlug = ''
+
+// Notion 的「兩欄／多欄」排版在 API 裡是 column_list > column > 區塊 的巢狀結構。
+// notion-to-md 預設不會保留並排關係，這裡改成手動抓子區塊、把每欄內的圖片下載下來，
+// 輸出成一段 grid 排版的 HTML（網站那邊用 rehype-raw 讓 react-markdown 直接渲染這段 HTML）。
+n2m.setCustomTransformer('column_list', async (block) => {
+  const columnsResp = await notion.blocks.children.list({ block_id: block.id })
+  const columns = columnsResp.results.filter((b) => b.type === 'column')
+  if (columns.length === 0) return ''
+
+  const colsClass = columns.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'
+  const columnHtml = []
+
+  for (let c = 0; c < columns.length; c++) {
+    const inner = await notion.blocks.children.list({ block_id: columns[c].id })
+    const imgTags = []
+    let imgIdx = 0
+    for (const b of inner.results) {
+      if (b.type !== 'image') continue
+      const url = b.image?.type === 'file' ? b.image.file?.url : b.image?.external?.url
+      if (!url) continue
+      imgIdx++
+      const localPath = await downloadImage(url, currentSlug, `col-${block.id.slice(0, 8)}-${c}-${imgIdx}`)
+      if (localPath) imgTags.push(`<img src="${localPath}" alt="" class="w-full h-auto block" />`)
+    }
+    columnHtml.push(`<div>${imgTags.join('')}</div>`)
+  }
+
+  return `\n<div class="grid ${colsClass} gap-4 mb-8">\n${columnHtml.join('\n')}\n</div>\n`
+})
 
 async function main() {
   if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
@@ -63,6 +98,7 @@ async function main() {
     console.log(`📝 處理: ${title} (${slug})`)
 
     // 頁面內文 → Markdown，圖片下載到本地
+    currentSlug = slug
     const mdBlocks = await n2m.pageToMarkdown(page.id)
     const mdResult = n2m.toMarkdownString(mdBlocks)
     const markdownContent = typeof mdResult === 'string' ? mdResult : (mdResult?.parent || '')

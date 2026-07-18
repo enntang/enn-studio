@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import { BASE } from './data'
 import Reveal from './Reveal'
 
@@ -7,6 +8,9 @@ import Reveal from './Reveal'
  * - 左欄：文字標示（回首頁）、作品標題、年代、介紹、返回連結
  * - 右側：Notion 同步下來的圖文內容（content，Markdown）；
  *   沒有 content 時退回顯示 images 陣列的大圖
+ *   Notion 裡用「兩欄」排版並排的圖片，同步腳本會轉成一段 grid HTML（見
+ *   scripts/notion-sync/index.mjs 的 column_list transformer），這裡用 rehype-raw
+ *   讓 react-markdown 把那段 HTML 當真正的元素渲染，而不是當純文字顯示
  */
 
 // 同步腳本會把內文圖片寫成 /work-images/... 的絕對路徑，
@@ -75,7 +79,7 @@ function WorkDetail({ work }) {
       {/* 右側：圖文內容 */}
       <main className='px-8 md:pl-0 md:pr-24 pt-8 md:pt-14 pb-24'>
         {work.content ? (
-          <ReactMarkdown components={mdComponents}>{work.content}</ReactMarkdown>
+          <ReactMarkdown components={mdComponents} rehypePlugins={[rehypeRaw]}>{work.content}</ReactMarkdown>
         ) : (
           (work.images || [work.cover]).filter(Boolean).map((src, i) => (
             <Reveal key={src} delay={i * 100} className='mb-8'>

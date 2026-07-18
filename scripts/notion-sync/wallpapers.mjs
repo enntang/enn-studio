@@ -84,6 +84,7 @@ async function main() {
     })
 
     usedSlugs.add(slug)
+    syncedWallpapers.add(slug)
     console.log('   ✅ 完成\n')
   }
 
