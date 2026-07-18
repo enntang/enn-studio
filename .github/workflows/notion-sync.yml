@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+# push 同步結果 + 觸發部署 workflow 所需的權限
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
