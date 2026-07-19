@@ -57,7 +57,7 @@ export const WORKS = [
   {
     "slug": "penguin-poster",
     "title": "虎年大吉大利",
-    "category": "personal",
+    "category": "client",
     "tags": [
       "Illustration",
       "Graphic Design"
