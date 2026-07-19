@@ -4,13 +4,23 @@ import Reveal from './Reveal'
 
 /**
  * 首頁：
- * - 固定左欄（文字標示、選單、斜體社群連結）
- * - 主區域為多欄瀑布流（CSS columns），點擊作品進入獨立頁面
+ * - 固定左欄（文字標示、選單、斜體社群連結）：CLIENT WORK / PERSONAL WORK 篩選
+ * - 主區域上方另有一排標籤篩選列（Notion 的 Tags 多選欄位），兩種篩選同時套用
+ * - 主區域為多欄瀑布流（CSS columns），縮圖下方固定顯示標題與標籤，點擊進入獨立頁面
  */
+
+// 所有作品目前用到的標籤，依字母排序
+const ALL_TAGS = [...new Set(WORKS.flatMap((w) => w.tags || []))].sort()
+
 function Home() {
   const [filter, setFilter] = useState(null) // null = all
+  const [tagFilter, setTagFilter] = useState(null) // null = all
 
-  const items = filter ? WORKS.filter((w) => w.category === filter) : WORKS
+  const items = WORKS.filter(
+    (w) =>
+      (filter === null || w.category === filter) &&
+      (tagFilter === null || (w.tags || []).includes(tagFilter))
+  )
 
   return (
     <div className='min-h-screen bg-white font-serif text-neutral-800'>
@@ -75,13 +85,34 @@ function Home() {
 
       {/* 瀑布流主區域 */}
       <main className='pl-8 pr-8 md:pl-64 md:pr-24 pt-10 md:pt-14 pb-24'>
+        {/* 標籤篩選列 */}
+        {ALL_TAGS.length > 0 && (
+          <div className='flex flex-wrap gap-x-5 gap-y-2 mb-10 text-[13px] tracking-[0.1em] text-neutral-500'>
+            <button
+              className={`hover:opacity-60 transition-opacity ${tagFilter === null ? 'text-neutral-900 underline underline-offset-4' : ''}`}
+              onClick={() => setTagFilter(null)}
+            >
+              All
+            </button>
+            {ALL_TAGS.map((tag) => (
+              <button
+                key={tag}
+                className={`hover:opacity-60 transition-opacity ${tagFilter === tag ? 'text-neutral-900 underline underline-offset-4' : ''}`}
+                onClick={() => setTagFilter(tag)}
+              >
+                #{tag}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className='columns-1 sm:columns-2 xl:columns-3 gap-8 [column-fill:balance]'>
           {items.map((item, i) => (
             <Reveal key={item.slug} delay={(i % 4) * 90} className='mb-8 break-inside-avoid'>
               <figure>
                 <a
                   href={`#/work/${item.slug}`}
-                  className='block w-full group relative'
+                  className='block w-full group'
                   aria-label={`View ${item.title}`}
                 >
                   {item.cover ? (
@@ -89,7 +120,7 @@ function Home() {
                       src={BASE + item.cover}
                       alt={item.title}
                       loading='lazy'
-                      className='w-full h-auto block'
+                      className='w-full h-auto block transition-opacity duration-300 group-hover:opacity-80'
                     />
                   ) : (
                     // Notion 尚未上傳 Cover 時的暫代區塊
@@ -97,12 +128,16 @@ function Home() {
                       {item.title}
                     </div>
                   )}
-                  {/* hover 時顯示標題與年份 */}
-                  <div className='absolute inset-0 bg-white/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 text-center px-4'>
-                    <div className='font-bold tracking-wider text-neutral-800'>{item.title}</div>
-                    <div className='text-xs tracking-[0.25em] text-neutral-500'>{item.year}</div>
-                  </div>
                 </a>
+                {/* 固定顯示標題與標籤 */}
+                <figcaption className='mt-3'>
+                  <div className='font-bold tracking-wide text-sm'>{item.title}</div>
+                  {item.tags?.length > 0 && (
+                    <div className='mt-1 text-xs tracking-wide text-neutral-400'>
+                      {item.tags.map((t) => `#${t}`).join(' ')}
+                    </div>
+                  )}
+                </figcaption>
               </figure>
             </Reveal>
           ))}

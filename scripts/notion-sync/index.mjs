@@ -12,6 +12,7 @@ import http from 'http'
  * Notion 欄位（資料庫：Studio Sync）：
  * - Name（標題）、Slug（文字）、Status（選項，Published 才同步）
  * - Category（選項：client / personal）
+ * - Tags（多選，首頁的標籤篩選列；選項可直接在 Notion 裡新增）
  * - Date（日期，創作日期；首頁依此排序，新的在前）
  * - Year（文字或數字，選填；沒填就從 Date 取年份）
  * - Description（文字，作品頁左欄介紹）、Cover（Files，首頁縮圖）
@@ -116,6 +117,7 @@ async function main() {
       slug,
       title,
       category: (getSelect(props.Category) || 'client').toLowerCase(),
+      tags: getMultiSelect(props.Tags),
       date,
       year: getText(props.Year) || getNumberText(props.Year) || (date ? date.slice(0, 4) : ''),
       description: getText(props.Description),
@@ -306,6 +308,10 @@ function getText(prop) {
 
 function getSelect(prop) {
   return prop?.select?.name || ''
+}
+
+function getMultiSelect(prop) {
+  return prop?.multi_select?.map((option) => option.name).filter(Boolean) || []
 }
 
 function getDate(prop) {
