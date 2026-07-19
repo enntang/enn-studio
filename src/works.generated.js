@@ -42,5 +42,18 @@ export const WORKS = [
     "description": "這是一本因應新課綱，南一書局高中歷史組和作者群傾盡心血製作的課本，內容在講述語言、翻譯如何影響我們的日常生活，是一個跨越地理位置與時間軸來看歷史的嶄新方法。",
     "cover": "work-images/history-text-book/cover.png",
     "content": "\n![image.png](/work-images/history-text-book/image-1.png)\n\n\n出版｜南一書局\n\n\n設計｜Enn Tang\n\n\n插畫｜Enn Tang\n\n\n年份｜2018\n\n\n# 封面設計\n\n\n風格與標準字都經過多次的演進過程。\n\n\n![image.png](/work-images/history-text-book/image-2.png)\n\n\n![image.png](/work-images/history-text-book/image-3.png)\n\n\n# **內頁與插畫設計**\n\n\n在課本內使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。\n\n\n![%E5%85%A7%E9%A0%812.jpg](/work-images/history-text-book/image-4.jpg)\n\n\n![%E5%85%A7%E9%A0%813.jpg](/work-images/history-text-book/image-5.jpg)\n\n\n![Artboard1.png](/work-images/history-text-book/image-6.png)\n\n\n![Artboard2.png](/work-images/history-text-book/image-7.png)\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/history-text-book/col1-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/history-text-book/col1-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n![Artboard8.png](/work-images/history-text-book/image-8.png)\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/history-text-book/col2-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/history-text-book/col2-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n![Artboard7.png](/work-images/history-text-book/image-9.png)\n\n\n![Artboard9.png](/work-images/history-text-book/image-10.png)\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/history-text-book/col3-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/history-text-book/col3-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n"
+  },
+  {
+    "slug": "tainan-scene",
+    "title": "台南一隅",
+    "category": "personal",
+    "tags": [
+      "Illustration"
+    ],
+    "date": "2018-03-04",
+    "year": "2018",
+    "description": "",
+    "cover": "work-images/tainan-scene/cover.jpg",
+    "content": "\n![1.jpg](/work-images/tainan-scene/image-1.jpg)\n\n"
   }
 ]
