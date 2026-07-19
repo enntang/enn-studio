@@ -3,7 +3,7 @@
 export const WORKS = [
   {
     "slug": "penguin-territory",
-    "title": "企鵝搶地 Penguin Territory",
+    "title": "企鵝搶地",
     "category": "personal",
     "tags": [
       "Illustration",
@@ -16,8 +16,21 @@ export const WORKS = [
     "content": "\n![thumbnail1.png](/work-images/penguin-territory/image-1.png)\n\n\n插畫使用於遊戲介面中的企鵝角色、背景裝飾等\n\n\n![%E6%88%BF%E9%96%93-%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA%E5%B0%9A%E6%9C%AA%E6%BA%96%E5%82%99%E5%A5%BD.png](/work-images/penguin-territory/image-2.png)\n\n\n![%E8%BC%AA%E5%88%B0%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA-03.png](/work-images/penguin-territory/image-3.png)\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col4-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col4-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col5-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col5-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col6-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col6-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n![%E7%A2%BA%E8%AA%8D%E7%99%BB%E5%87%BApopup.png](/work-images/penguin-territory/image-4.png)\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col7-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col7-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col8-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col8-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n\n\n<div class=\"grid grid-cols-2 gap-4 mb-8\">\n<div><img src=\"/work-images/penguin-territory/col9-0-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n<div><img src=\"/work-images/penguin-territory/col9-1-1.png\" alt=\"\" class=\"w-full h-auto block\" /></div>\n</div>\n\n\n"
   },
   {
+    "slug": "kiwi-buddies",
+    "title": "Kiwi buddies",
+    "category": "personal",
+    "tags": [
+      "Illustration"
+    ],
+    "date": "2022-01-15",
+    "year": "2022",
+    "description": "",
+    "cover": "work-images/kiwi-buddies/cover.png",
+    "content": ""
+  },
+  {
     "slug": "year-of-the-tiger",
-    "title": "虎年紀念悠遊卡 Year of the Tiger Commemorative EasyCard",
+    "title": "虎年紀念悠遊卡",
     "category": "personal",
     "tags": [
       "Illustration",
