@@ -6,7 +6,8 @@ export const WORKS = [
     "title": "企鵝搶地",
     "category": "project",
     "tags": [
-      "Game UI"
+      "Web Design",
+      "UI/UX"
     ],
     "date": "2024-09-01",
     "year": "2024",
@@ -36,7 +37,7 @@ export const WORKS = [
     "title": "虎年紀念悠遊卡",
     "category": "project",
     "tags": [
-      "Graphic Design"
+      "Graphic"
     ],
     "date": "2022-01-03",
     "year": "2022",
@@ -52,7 +53,7 @@ export const WORKS = [
     "title": "南一書局高中歷史課本《給年輕史家的漫遊指南》",
     "category": "project",
     "tags": [
-      "Graphic Design"
+      "Graphic"
     ],
     "date": "2018-11-01",
     "year": "2018",
